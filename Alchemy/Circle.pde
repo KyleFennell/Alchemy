@@ -1,11 +1,17 @@
-
 class Circle implements Shape {
 
   float radius;
-  point origin;
+  PVector origin;
+  ArrayList<Integer> regions;
 
-  Circle(float x, float y, float radius) {
-    origin = point(x, y);
+  Circle(float x, float y, float radius, boolean regions[]) {
+    this.regions = new ArrayList<Integer>();
+    for (int i = 0; i < regions.length; i++) {
+      if (regions[i]) {
+        this.regions.add(i);
+      }
+    }
+    origin = new PVector(x, y);
     this.radius = radius;
   }
 
@@ -16,7 +22,30 @@ class Circle implements Shape {
     return false;
   }
 
-  point origin() {
+  PVector origin() {
     return origin;
+  }
+
+  float radius() {
+    return radius;
+  }
+  
+  PVector getSpawn(){
+    int reg = regions.get((int)random(regions.size()));
+    if (reg == 8){
+      return origin;
+    }
+    float x = random(PI/4);
+    float y = random(PI/4);
+    return new PVector(sin(x+(reg*PI/4)), cos(y+(reg*PI/4))).normalize().mult(radius).add(origin);
+  }
+
+  void move(float x, float y) {
+    origin.x = x;
+    origin.y = y;
+  }
+
+  void render() {
+    ellipse(origin.x, origin.y, radius, radius);
   }
 }
