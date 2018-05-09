@@ -37,7 +37,7 @@ class Particle_Star implements Particle {
   }
 
   boolean isDead() {
-    if (dist(pos.x, pos.y, shape.origin().x, shape.origin().y) < shape.radius()) {
+    if (shape.isInside(pos.x, pos.y)) {
       return false;
     }
     return true;

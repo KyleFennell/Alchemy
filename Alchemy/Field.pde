@@ -1,4 +1,4 @@
-interface Field{
+interface Field {
   void update();
   void render();
 }

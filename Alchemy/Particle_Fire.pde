@@ -20,7 +20,7 @@ class Particle_Fire implements Particle {
   }
 
   void update() {
-    if (!shape.isInside(pos.x, pos.y)) {
+    if (isDead()) {
       rebirth();
     }
     acc = new PVector((random(1)*2-1)*20*acceleration, -acceleration);
@@ -45,10 +45,10 @@ class Particle_Fire implements Particle {
   }
 
   boolean isDead() {
-    if (shape.isInside(pos.x, pos.y)){
-      return true;
+    if (shape.isInside(pos.x, pos.y)) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   void capVelocity() {

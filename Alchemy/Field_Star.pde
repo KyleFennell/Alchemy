@@ -1,5 +1,5 @@
 class Field_Star implements Field {
-  
+
   ArrayList<Particle> particles = new ArrayList<Particle>();
   int noOfParticles;
   PImage sprite;
@@ -25,13 +25,14 @@ class Field_Star implements Field {
   }
 
   void render() {
+    shape.render();
     for (int i = 0; i < particles.size(); i++) {
       Particle p1 = particles.get(i);
       p1.render();
-      for (int j = 0; j < i; j++){
+      for (int j = 0; j < i; j++) {
         Particle p2 = particles.get(j);
         float distance = dist(p1.pos().x, p1.pos().y, p2.pos().x, p2.pos().y);
-        if (distance < threshold){
+        if (distance < threshold) {
           int alpha = round(255/threshold*(threshold-distance));
           stroke(255, alpha);
           line(p1.pos().x, p1.pos().y, p2.pos().x, p2.pos().y);

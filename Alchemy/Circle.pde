@@ -29,15 +29,15 @@ class Circle implements Shape {
   float radius() {
     return radius;
   }
-  
-  PVector getSpawn(){
+
+  PVector getSpawn() {
     int reg = regions.get((int)random(regions.size()));
-    if (reg == 8){
-      return origin;
+    if (reg == 8) {
+      return new PVector(origin.x, origin.y);
     }
     float x = random(PI/4);
     float y = random(PI/4);
-    return new PVector(sin(x+(reg*PI/4)), cos(y+(reg*PI/4))).normalize().mult(radius).add(origin);
+    return new PVector(cos(x+(reg*PI/4)), sin(y+(reg*PI/4))).normalize().mult(radius).add(origin);
   }
 
   void move(float x, float y) {
@@ -46,6 +46,9 @@ class Circle implements Shape {
   }
 
   void render() {
-    ellipse(origin.x, origin.y, radius, radius);
+    strokeWeight(2);
+    stroke(255);
+    fill(0);
+    ellipse(origin.x, origin.y, radius*2, radius*2);
   }
 }

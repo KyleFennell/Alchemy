@@ -24,6 +24,7 @@ class Field_Fire implements Field {
   }
 
   void render() {
+    shape.render();
     for (Particle p : particles) {
       p.render();
     }

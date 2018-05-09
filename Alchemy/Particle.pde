@@ -1,5 +1,5 @@
-interface Particle{
-  
+interface Particle {
+
   void update();
   void render();
   void rebirth();
