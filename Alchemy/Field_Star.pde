@@ -2,21 +2,24 @@ class Field_Star implements Field {
 
   ArrayList<Particle> particles = new ArrayList<Particle>();
   int noOfParticles;
+  float acceleration;
+  float velocity;
   PImage sprite;
+  float threshold = 30;
   Shape shape;
-  float threshold;
 
-  Field_Star(int noOfParticles, Shape shape, PImage sprite) {
-    this.shape = shape;
+  Field_Star(int noOfParticles, float acceleration, float velocity, Shape shape, PImage sprite) {
     this.noOfParticles = noOfParticles;
+    this.acceleration = acceleration;
+    this.velocity = velocity;
+    this.shape = shape;
     this.sprite = sprite;
-    threshold = shape.radius()/5;
   }
 
   void update() {
     if (particles.size() < noOfParticles) {
       for (int i = 0; i < noOfParticles/frameRate/3 && particles.size() < noOfParticles; i++) {
-        particles.add(new Particle_Star(shape, 1, 0.05, sprite));
+        particles.add(new Particle_Star(shape, velocity, acceleration, sprite));
       }
     }
     for (Particle p : particles) {

@@ -1,4 +1,4 @@
-class Field_Fire implements Field {
+class Field_Water implements Field {
 
   ArrayList<Particle> particles = new ArrayList<Particle>();
   int noOfParticles;
@@ -7,7 +7,7 @@ class Field_Fire implements Field {
   PImage sprite;
   Shape shape;
 
-  Field_Fire(int noOfParticles, float acceleration, float velocity, Shape shape, PImage sprite) {
+  Field_Water(int noOfParticles, float acceleration, float velocity, Shape shape, PImage sprite) {
     this.noOfParticles = noOfParticles;
     this.acceleration = acceleration;
     this.velocity = velocity;
@@ -19,7 +19,7 @@ class Field_Fire implements Field {
     noStroke();
     if (particles.size() < noOfParticles) {
       for (int i = 0; i < noOfParticles/frameRate/10 && particles.size() < noOfParticles; i++) {
-        particles.add(new Particle_Fire(shape, velocity, acceleration, sprite));
+        particles.add(new Particle_Water(shape, velocity, acceleration, sprite));
       }
     }
     for (Particle p : particles) {

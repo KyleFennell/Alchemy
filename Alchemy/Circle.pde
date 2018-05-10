@@ -35,8 +35,8 @@ class Circle implements Shape {
     if (reg == 8) {
       return new PVector(origin.x, origin.y);
     }
-    float x = random(PI/4);
-    float y = random(PI/4);
+    float x = random(PI/3.5);
+    float y = random(PI/3.5);
     return new PVector(cos(x+(reg*PI/4)), sin(y+(reg*PI/4))).normalize().mult(radius).add(origin);
   }
 
