@@ -1,21 +1,22 @@
-class Particle_Star implements Particle {
+class Particle_Star extends Particle {
   PVector pos;
   PVector vel;
+  PVector acc;
   float velocity;
   float acceleration;
-  float maxVelocity = 3;
+  float maxVelocity = 2;
   PImage sprite;
   Shape shape;
   color col;
 
   Particle_Star(Shape shape, float velocity, float acceleration, PImage sprite) {
-    this.shape = shape;
-    pos = new PVector();
+    super(shape, velocity, acceleration, sprite);
     rebirth();
-    this.velocity = velocity;
-    this.acceleration = acceleration;
-    vel = new PVector((random(1)*2-1)*velocity, (random(1)*2-1)*velocity);
-    this.sprite = sprite;
+  }
+  
+    @Override
+  Particle clone(){
+    return new Particle_Star(shape, velocity, acceleration, sprite);
   }
 
   void update() {

@@ -1,4 +1,4 @@
-class Particle_Snow implements Particle {
+class Particle_Snow extends Particle {
   PVector pos;
   PVector vel;
   PVector acc;
@@ -10,11 +10,13 @@ class Particle_Snow implements Particle {
   color col;
 
   Particle_Snow(Shape shape, float velocity, float acceleration, PImage sprite) {
-    this.shape = shape;
-    this.velocity = velocity;
-    this.acceleration = acceleration;
-    this.sprite = sprite;
+    super(shape, velocity, acceleration, sprite);
     rebirth();
+  }
+  
+    @Override
+  Particle clone(){
+    return new Particle_Snow(shape, velocity, acceleration, sprite);
   }
 
   void update() {
