@@ -1,10 +1,10 @@
-class Circle implements Shape {
+class Bubble{
 
   float radius;
   PVector origin;
   ArrayList<Integer> regions;
 
-  Circle(float x, float y, float radius, boolean regions[]) {
+  Bubble(float x, float y, float radius, boolean regions[]) {
     this.regions = new ArrayList<Integer>();
     for (int i = 0; i < regions.length; i++) {
       if (regions[i]) {
