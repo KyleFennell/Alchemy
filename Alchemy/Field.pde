@@ -32,7 +32,7 @@ class Field<P extends Particle> {
 class Field_Star<P extends Particle> extends Field<P> {
 
   int threshold = 50;
-  
+
   Field_Star(int noOfParticles, P blueprint, int threshold) {
     super(noOfParticles, blueprint);
     this.threshold = threshold;

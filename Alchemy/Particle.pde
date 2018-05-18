@@ -7,7 +7,7 @@ abstract class Particle {
   float velocity;
   float acceleration;
   // other
-  float maxVelocity = 10;
+  float maxVelocity = 30;
   float minVelocity = 0.3;
   PImage sprite;
   Bubble bubble;
@@ -35,7 +35,7 @@ abstract class Particle {
   void render() {
     imageMode(CENTER);
     tint(col);
-    image(sprite, pos.x, pos.y, 32, 32);
+    image(sprite, pos.x, pos.y, bubble.radius()/3, bubble.radius()/3);
   }
 
   abstract void rebirth();
@@ -117,7 +117,13 @@ class Particle_Radial extends Particle {
     if (isDead()) {
       rebirth();
     }
-    acc = new PVector(vel.x*acceleration, vel.y*acceleration);
+    goal = bubble.getSpawn();
+    PVector velt = new PVector(pos.x - goal.x, pos.y - goal.y);
+    velt.normalize();
+    if (velocity >= 0) {
+      velt.mult(-1);
+    }
+    acc = new PVector(velt.x*acceleration, velt.y*acceleration);
     vel.add(acc);
     pos.add(vel);
     capVelocity();
@@ -164,9 +170,9 @@ class Particle_Random extends Particle {
   int interval = 50 ;
   int nextChange = interval;
 
-  Particle_Random(Bubble bubble, float velocity, float acceleration, int interval, PImage sprite) {
+  Particle_Random(Bubble bubble, float velocity, float acceleration, float interval, PImage sprite) {
     super(bubble, velocity, acceleration, sprite);
-    this.interval = interval;
+    this.interval = floor(interval);
     rebirth();
   }
 
@@ -225,7 +231,7 @@ class Particle_Sine extends Particle {
     vel.add(acc);
     capVelocity();
     aPos.add(vel);
-    pos = new PVector(aPos.x, aPos.y).add(new PVector(vel.x, vel.y).rotate(PI/2).normalize().mult(sin(frameCount*speed+offset)*20));
+    pos = new PVector(aPos.x, aPos.y).add(new PVector(vel.x, vel.y).rotate(PI/2).normalize().mult(sin(frameCount*speed+offset)*bubble.radius()/20));
   }
 
   @Override

@@ -6,34 +6,36 @@ ArrayList<Gene> genes;
 
 void setup() {
   size(800, 600, P2D);
+  sprite = loadImage("cow.png");
   genes = new ArrayList<Gene>();
   String s = "";
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 5; j++) {
+  int xMajor = 1, yMajor = 1; 
+  for (int i = 0; i < yMajor; i++) {
+    for (int j = 0; j < xMajor; j++) {
       Gene g;
       do {
-        g = new Gene(new PVector(width*(j*2+1)/10, height*(i*2+1)/8), height/10);
+        g = new Gene(new PVector(width*(j*2+1)/(xMajor*2), height*(i*2+1)/(yMajor*2)), height/(xMajor*2), sprite, 30);
         g.generate();
-      } while (g.size() < 10 || g.size() > 20);
+      } while (g.size() < 5 || g.size() > 30);
       genes.add(g);
       s += g.size() + "\t";
     }
     s += "\n";
-    for (int j = 0; j < 4 && i != 3; j++) {
+    for (int j = 0; j < xMajor-1 && i != yMajor-1; j++) {
       Gene g;
         do {
-        g = new Gene(new PVector(width*(j*2+2)/10, height*(i*2+2)/8), height/10);
+        g = new Gene(new PVector(width*(j*2+2)/(xMajor*2), height*(i*2+2)/(yMajor*2)), height/(xMajor*2), sprite, 15);
         g.generate();
-      } while (g.size() < 10 || g.size() > 20);
+      } while (g.size() < 5 || g.size() > 15);
       genes.add(g);
       s += "     "+g.size()+"\t";
     }
     s+= "\n";
   }
   print(s);
+  println(genes.get(0));
 
   //fields = new ArrayList<Field>();
-  //sprite = loadImage("sprite.png");
 
   //fields.add(new Field<Particle_Fire>(500, new Particle_Fire(new Circle(width*1/6, height*2/10, height/5, Factory_Region.getRegion("South")), 1, 0.05, sprite)));
   //fields.add(new Field<Particle_Water>(500, new Particle_Water(new Circle(width*3/6, height*2/10, height/5, Factory_Region.getRegion("South")), 1, 0.1, sprite)));
@@ -74,5 +76,6 @@ void draw() {
 }
 
 void mouseClicked() {
+  // TODO clickable print tree
   setup();
 }
